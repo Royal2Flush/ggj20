@@ -28,7 +28,11 @@ public partial class GameStates : MonoBehaviour
     [Header("UI")]
     public GameObject Splash;
     public GameObject GameOverText;
+    public GameObject WinUI;
     public TextMeshProUGUI CountdownText;
+    public TextMeshProUGUI SplashText;
+    public TextMeshProUGUI ProgressText;
+    public TextMeshProUGUI CukText;
     public Image PlayerImage;
     public Image TargetImage;
     public TextMeshProUGUI PlayerText;
@@ -85,7 +89,10 @@ public partial class GameStates : MonoBehaviour
         TargetImage.gameObject.SetActive(false);
 
         GameOverText.SetActive(false);
+        WinUI.gameObject.SetActive(false);
         CountdownText.text = "";
+        ProgressText.text = "";
+        CukText.text = "";
 
         ChangeState(GameState.Countdown);
     }
@@ -95,7 +102,7 @@ public partial class GameStates : MonoBehaviour
         if (CurrentState == GameState.Splash)
         {
             Splash.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Return))
             {
                 ChangeState(GameState.Countdown);
             }
@@ -164,7 +171,15 @@ public partial class GameStates : MonoBehaviour
         else if (CurrentState == GameState.Lose)
         {
             GameOverText.gameObject.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Return))
+            {
+                LoadLevel(0);
+            }
+        }
+        else if (CurrentState == GameState.Win)
+        {
+            WinUI.gameObject.SetActive(true);
+            if (Input.GetKeyUp(KeyCode.Return))
             {
                 LoadLevel(0);
             }
@@ -175,13 +190,17 @@ public partial class GameStates : MonoBehaviour
     {
 
         _isCountingDown = true;
+        ProgressText.text = CurrentLevelId.ToString() + " out of " + levels.Length.ToString();
         CountdownText.text = "3";
+        SplashText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         CountdownText.text = "2";
         yield return new WaitForSeconds(1f);
         CountdownText.text = "1";
         yield return new WaitForSeconds(1f);
         CountdownText.text = "";
+        ProgressText.text = "";
+        SplashText.gameObject.SetActive(false);
         ChangeState(GameState.Input);
         _isCountingDown = false;
     }
@@ -191,6 +210,7 @@ public partial class GameStates : MonoBehaviour
         _isPlaying = true;
         for (int i = 0; i < inputs.Count; i++)
         {
+            yield return new WaitForSeconds(0.5f);
             PlayerInputs inp = inputs[i];
             if (inp == PlayerInputs.Left)
             {
@@ -232,11 +252,21 @@ public partial class GameStates : MonoBehaviour
 
             StartCoroutine(LerpCoroutine(PlayerImage.rectTransform, PlayerTransform));
             MyInput.PaintAsDone(i, CurrentLevel.spriteColor);
-            yield return new WaitForSeconds(0.5f);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
         {
-            ChangeState(GameState.Transition);
+            CukText.transform.position = TargetImage.gameObject.transform.position;
+            CukText.text = "CUK";
+            yield return new WaitForSeconds(0.5f);
+            CukText.text = "";
+            if (CurrentLevelId+1 == levels.Length)
+            {
+                ChangeState(GameState.Win);
+            }
+            else
+            {
+                ChangeState(GameState.Transition);
+            }
         }
         else
         {
