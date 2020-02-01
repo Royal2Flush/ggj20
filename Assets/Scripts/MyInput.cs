@@ -80,10 +80,10 @@ public class MyInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) Add(PlayerInputs.Left);
         if (Input.GetKeyDown(KeyCode.S)) Add(PlayerInputs.Down);
         if (Input.GetKeyDown(KeyCode.D)) Add(PlayerInputs.Right);
-        if (Input.mouseScrollDelta.y > 0) Add(PlayerInputs.ScaleUp);
-        if (Input.mouseScrollDelta.y < 0) Add(PlayerInputs.ScaleDown);
-        if (Input.GetMouseButtonDown(0)) Add(PlayerInputs.CounterCW);
-        if (Input.GetMouseButtonDown(1)) Add(PlayerInputs.CW);
+        if (Input.mouseScrollDelta.y > 0  || Input.GetButtonDown("XboxB")) Add(PlayerInputs.ScaleUp);
+        if (Input.mouseScrollDelta.y < 0 || Input.GetButtonDown("XboxA")) Add(PlayerInputs.ScaleDown);
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxBumperLeft")) Add(PlayerInputs.CounterCW);
+        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("XboxBumperRight")) Add(PlayerInputs.CW);
 
         _timer -= Time.deltaTime;
 
