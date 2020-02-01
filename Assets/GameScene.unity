@@ -1338,6 +1338,30 @@ MonoBehaviour:
   InputIconPrefab: {fileID: 3446220086344654965, guid: 06887ec564fad7a4b829e9bbb2c154bf,
     type: 3}
   Slider: {fileID: 1803708373}
+  PaintCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   LeftSprite: {fileID: 21300000, guid: 92fa49d052917204c91a989a8789ca90, type: 3}
   RightSprite: {fileID: 21300000, guid: 583655b8cbe3c6b47a9bdce8cc3a9962, type: 3}
   UpSprite: {fileID: 21300000, guid: eca6b40fe55e524488bd56e5b73e399a, type: 3}

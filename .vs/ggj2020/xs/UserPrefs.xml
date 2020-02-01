@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{3DBDC490-0979-9566-A825-E9F0C95CB7EC}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameStates.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameStates.cs" Line="286" Column="13" />
+      <File FileName="Assets/Scripts/GameStates.cs" Line="59" Column="1" />
       <File FileName="Assets/Scripts/GameState.cs" Line="7" Column="15" />
       <File FileName="Assets/Scripts/MyInput.cs" />
       <File FileName="Assets/Scripts/MyTransform.cs" />
+      <File FileName="Assets/Scripts/Levels.cs" Line="5" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,6 +18,9 @@
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

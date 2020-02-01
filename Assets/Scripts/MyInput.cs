@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class MyInput : MonoBehaviour
     public Transform InputIconsParent;
     public GameObject InputIconPrefab;
     public Slider Slider;
+    public AnimationCurve PaintCurve;
 
     [Header("InputIcons")]
 
@@ -106,4 +108,27 @@ public class MyInput : MonoBehaviour
         var go = Instantiate(InputIconPrefab, InputIconsParent);
         go.GetComponent<Image>().sprite = _resourceMap[inputType];
     }
+
+    public void PaintAsDone(int doneStepIndex, Color paintColor)
+    {
+        Image lastImage = InputIconsParent.GetChild(doneStepIndex).GetComponent<Image>();
+        StartCoroutine(PaintCoroutine(lastImage, paintColor));
+    }
+
+    private IEnumerator PaintCoroutine(Image image, Color targetColor)
+    {
+        const float duration = 0.25f;
+        Color srcColor = image.color;
+        for (float f = 0; f < duration; f += Time.deltaTime)
+        {
+            float t = PaintCurve.Evaluate(f / duration);
+
+            image.color = Color.Lerp(srcColor, targetColor, t);
+
+            yield return null;
+        }
+
+        image.color = targetColor;
+    }
+
 }

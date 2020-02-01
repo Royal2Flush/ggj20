@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameStates : MonoBehaviour
+public partial class GameStates : MonoBehaviour
 {
     public List<string> TshirtSize = new List<string>
     {
@@ -36,6 +36,7 @@ public class GameStates : MonoBehaviour
     public AnimationCurve LerpCurve;
 
     [Space]
+
     public Level[] levels;
 
     private int translateCoeff = 100;
@@ -55,46 +56,16 @@ public class GameStates : MonoBehaviour
 
     void Start()
     {
-        for (int i=0; i<=Screen.width / 100; i++)
+        for (int i = 0; i <= Screen.width / 100; i++)
         {
-            for( int j=0; j<=Screen.height / 100; j++)
+            for (int j = 0; j <= Screen.height / 100; j++)
             {
                 GameObject go = Instantiate(Dot, new Vector3(i * 100, j * 100, 0), Quaternion.identity, DotParent);
                 dotMaterial = go.GetComponent<Image>().material;
             }
         }
 
-        levels = new Level[]
-        {
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 5, y = 3, rotation = 7, scale = 1
-                },
-                start = new MyTransform
-                {
-                    x = 3, y = 5, rotation = 0, scale = 1
-                },
-                sprite = Sprites[0],
-                bgColor = Color.red,
-                spriteColor = Color.blue
-            },
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 7, y = 1, rotation = 4, scale = 2
-                },
-                start = new MyTransform
-                {
-                    x = 1, y = 5, rotation = 7, scale = 2
-                },
-                sprite = Sprites[0],
-                bgColor = Color.gray,
-                spriteColor = Color.green
-            },
-        };
+        InitLevels();
 
         LoadLevel(0);
 
@@ -218,8 +189,9 @@ public class GameStates : MonoBehaviour
     private IEnumerator PlayCoroutine(List<PlayerInputs> inputs)
     {
         _isPlaying = true;
-        foreach (var inp in inputs)
+        for (int i = 0; i < inputs.Count; i++)
         {
+            PlayerInputs inp = inputs[i];
             if (inp == PlayerInputs.Left)
             {
                 PlayerTransform.x--;
@@ -259,7 +231,7 @@ public class GameStates : MonoBehaviour
             PlayerTransform.rotation %= 8;
 
             StartCoroutine(LerpCoroutine(PlayerImage.rectTransform, PlayerTransform));
-
+            MyInput.PaintAsDone(i, CurrentLevel.spriteColor);
             yield return new WaitForSeconds(0.5f);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
