@@ -775,12 +775,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92686afb652434c749d61ccb08d07c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  MyInput: {fileID: 0}
+  Camera: {fileID: 563407299}
+  MyInput: {fileID: 1722180258}
   Sprites:
   - {fileID: 21300000, guid: 185d04b3a7eddd843be5fbed16cf040f, type: 3}
-  Splash: {fileID: 0}
-  CountdownText: {fileID: 0}
+  Splash: {fileID: 1369004506}
+  CountdownText: {fileID: 1868941406}
   PlayerImage: {fileID: 495922912}
   TargetImage: {fileID: 1716171548}
   translateCoeff: 100
@@ -811,9 +811,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722180255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de080d44698ea134daf246bba22e9c3c, type: 3}
+  m_Script: {fileID: 11500000, guid: defddfc0397554a398d9f5cea2effe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myInputs: 
 --- !u!1 &1868941404
 GameObject:
   m_ObjectHideFlags: 0

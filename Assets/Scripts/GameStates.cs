@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,7 @@ public class GameStates : MonoBehaviour
 
     [Header("UI")]
     public GameObject Splash;
-    public Text CountdownText;
+    public TextMeshProUGUI CountdownText;
     public Image PlayerImage;
     public Image TargetImage;
 
@@ -30,6 +31,7 @@ public class GameStates : MonoBehaviour
     public int CurrentLevelId;
 
     private bool _isCountingDown = false;
+    private bool _isInputState = false;
     private bool _isPlaying = false;
 
     void Start()
@@ -60,6 +62,9 @@ public class GameStates : MonoBehaviour
         PlayerImage.gameObject.SetActive(false);
         TargetImage.gameObject.SetActive(false);
 
+        Splash.SetActive(true);
+        CountdownText.text = "";
+
         ChangeState(GameState.Splash);
     }
 
@@ -82,17 +87,29 @@ public class GameStates : MonoBehaviour
         }
         else if (CurrentState == GameState.Input)
         {
-            Camera.backgroundColor = CurrentLevel.bgColor;
-
-            PlayerImage.gameObject.SetActive(true);
-            TargetImage.gameObject.SetActive(true);
-
-            PlayerImage.color = CurrentLevel.bgColor * 0.9f;
-            TargetImage.color = CurrentLevel.spriteColor;
-
-            if (MyInput.Tick())
+            if (!_isInputState)
             {
+                _isInputState = true;
+                Camera.backgroundColor = CurrentLevel.bgColor;
+
+                PlayerImage.gameObject.SetActive(true);
+                TargetImage.gameObject.SetActive(true);
+
+                PlayerImage.color = CurrentLevel.bgColor * 0.9f;
+                TargetImage.color = CurrentLevel.spriteColor;
+                MyInput.Init();
+            }
+
+            var res = MyInput.Tick();
+            if (res == InputTickResult.Confirm)
+            {
+                _isInputState = false;
                 ChangeState(GameState.Play);
+            }
+            else if (res == InputTickResult.Timeout)
+            {
+                _isInputState = false;
+                ChangeState(GameState.Lose);
             }
         }
         else if (CurrentState == GameState.Play)
