@@ -174,6 +174,7 @@ public partial class GameStates : MonoBehaviour
             GameOverText.gameObject.SetActive(true);
             if (Input.GetKeyUp(KeyCode.Return))
             {
+                InitLevels();
                 LoadLevel(0);
             }
         }
@@ -182,6 +183,7 @@ public partial class GameStates : MonoBehaviour
             WinUI.gameObject.SetActive(true);
             if (Input.GetKeyUp(KeyCode.Return))
             {
+                InitLevels();
                 LoadLevel(0);
             }
         }
