@@ -116,7 +116,8 @@ public class GameStates : MonoBehaviour
         {
             if (!_isPlaying)
             {
-                StartCoroutine(PlayCoroutine(new List<PlayerInputs>()));
+                var list = MyInput.myInputs;
+                StartCoroutine(PlayCoroutine(list));
             }
         }
     }
@@ -172,9 +173,14 @@ public class GameStates : MonoBehaviour
             {
                 PlayerTransform.scale--;
             }
-            PlayerImage.gameObject.transform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
-            PlayerImage.gameObject.transform.Rotate(new Vector3(0, 0, PlayerTransform.rotation * rotateCoeff));
-            PlayerImage.gameObject.transform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
+            PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, 15);
+            PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, 15);
+            PlayerTransform.scale = Mathf.Clamp(PlayerTransform.scale, 1, 5);
+            PlayerTransform.rotation = Mathf.Clamp(PlayerTransform.rotation, 0, 11);
+
+            PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
+            PlayerImage.rectTransform.Rotate(new Vector3(0, 0, PlayerTransform.rotation * rotateCoeff));
+            PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
             yield return new WaitForSeconds(playSpeed);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
