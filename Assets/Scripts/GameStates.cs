@@ -13,6 +13,7 @@ public class GameStates : MonoBehaviour
 
     [Header("UI")]
     public GameObject Splash;
+    public GameObject GameOverText;
     public TextMeshProUGUI CountdownText;
     public Image PlayerImage;
     public Image TargetImage;
@@ -36,8 +37,13 @@ public class GameStates : MonoBehaviour
 
     void Start()
     {
-        levels = new Level[]
-        {
+        Init();
+    }
+
+    void Init()
+    {
+      levels = new Level[]
+      {
             new Level
             {
                 target = new MyTransform
@@ -52,7 +58,7 @@ public class GameStates : MonoBehaviour
                 bgColor = Color.red,
                 spriteColor = Color.blue
             }
-        };
+      };
 
         CurrentLevelId = 0;
         CurrentLevel = levels[CurrentLevelId];
@@ -63,6 +69,7 @@ public class GameStates : MonoBehaviour
         TargetImage.gameObject.SetActive(false);
 
         Splash.SetActive(true);
+        GameOverText.SetActive(false);
         CountdownText.text = "";
 
         ChangeState(GameState.Splash);
@@ -126,6 +133,14 @@ public class GameStates : MonoBehaviour
             {
                 var list = MyInput.myInputs;
                 StartCoroutine(PlayCoroutine(list));
+            }
+        }
+        else if (CurrentState == GameState.Lose)
+        {
+            GameOverText.gameObject.SetActive(true);
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                Init();
             }
         }
     }
