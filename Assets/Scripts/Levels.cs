@@ -41,13 +41,13 @@ public partial class GameStates
     Level GenerateLevel()
     {
         int targetX = Random.Range(1, Screen.width / 100 - 1);
-        int targetY = Random.Range(1, Screen.width / 100 - 1);
-        int targetRot = Random.Range(-3, 4);
+        int targetY = Random.Range(1, Screen.height / 100 - 1);
+        int targetRot = Random.Range(1, 7);
         int targetScale = Random.Range(1, 5);
 
-        int playerX = Random.Range(1, Screen.width / 100 - 1);
-        int playerY = 10 - playerX;
-        int playerRot = Random.Range(-3, 4);
+        int playerY = Random.Range(1, Screen.height / 100 - 1);
+        int playerX = 10-playerY;
+        int playerRot = Random.Range(1, 7);
         int playerScale = Random.Range(1, 5);
 
         const float valueMin = 0.3f;
