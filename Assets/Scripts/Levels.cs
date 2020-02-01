@@ -9,33 +9,9 @@ public partial class GameStates
             GenerateLevel(),
             GenerateLevel(),
             GenerateLevel(),
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 5, y = 3, rotation = 7, scale = 1
-                },
-                start = new MyTransform
-                {
-                    x = 3, y = 5, rotation = 0, scale = 1
-                },
-                sprite = Sprites[0],
-            },
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 7, y = 1, rotation = 4, scale = 2
-                },
-                start = new MyTransform
-                {
-                    x = 1, y = 5, rotation = 7, scale = 2
-                },
-                sprite = Sprites[0],
-            },
+            GenerateLevel(),
+            GenerateLevel()
         };
-
-        
     }
 
     Level GenerateLevel()
@@ -45,8 +21,8 @@ public partial class GameStates
         int targetRot = Random.Range(1, 7);
         int targetScale = Random.Range(1, 5);
 
-        int playerY = Random.Range(1, Screen.height / 100 - 1);
-        int playerX = 10-playerY;
+        int playerX = targetX + Random.Range(-5, 5);
+        int playerY = targetY + Random.Range(-5, 5);
         int playerRot = Random.Range(1, 7);
         int playerScale = Random.Range(1, 5);
 

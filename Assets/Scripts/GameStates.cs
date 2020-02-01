@@ -136,7 +136,8 @@ public partial class GameStates : MonoBehaviour
 
                 UpdateSizeTexts();
 
-                TargetImage.color = CurrentLevel.bgColor * 0.9f;
+                //TargetImage.color = CurrentLevel.bgColor * 0.9f;
+                TargetImage.color = Color.white;
                 PlayerImage.color = CurrentLevel.spriteColor;
                 dotMaterial.color = PlayerImage.color;
 
