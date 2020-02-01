@@ -31,6 +31,7 @@ public class MyInput : MonoBehaviour
 
     public Transform InputIconsParent;
     public GameObject InputIconPrefab;
+    public Slider Slider;
 
     [Header("InputIcons")]
 
@@ -63,7 +64,7 @@ public class MyInput : MonoBehaviour
     public void Init()
     {
         myInputs = new List<PlayerInputs>();
-        _timer = 0;
+        _timer = TimeLimit;
         
         foreach (Transform t in InputIconsParent)
         {
@@ -82,9 +83,11 @@ public class MyInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) Add(PlayerInputs.ScaleDown);
         if (Input.GetMouseButtonDown(1)) Add(PlayerInputs.ScaleUp);
 
-        _timer += Time.deltaTime;
+        _timer -= Time.deltaTime;
 
-        if (_timer > TimeLimit)
+        Slider.value = _timer / TimeLimit;
+
+        if (_timer <= 0)
         {
             return InputTickResult.Timeout;
         }
