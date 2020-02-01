@@ -6,6 +6,17 @@ using UnityEngine.UI;
 
 public class GameStates : MonoBehaviour
 {
+    public List<string> TshirtSize = new List<string>
+    {
+        "XXS",
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+    };
+
     public Camera Camera;
     public MyInput MyInput;
 
@@ -17,12 +28,14 @@ public class GameStates : MonoBehaviour
     public TextMeshProUGUI CountdownText;
     public Image PlayerImage;
     public Image TargetImage;
+    public TextMeshProUGUI PlayerText;
+    public TextMeshProUGUI TargetText;
 
     [Space]
     public Level[] levels;
 
     public int translateCoeff = 100;
-    public int rotateCoeff = 30;
+    public int rotateCoeff = 45;
     public float scaleCoeff = 1.5f;
 
     public GameState CurrentState;
@@ -64,6 +77,7 @@ public class GameStates : MonoBehaviour
         CurrentLevel = levels[CurrentLevelId];
         PlayerTransform = CurrentLevel.start;
         TargetTransform = CurrentLevel.target;
+        UpdateSizeTexts();
 
         PlayerImage.gameObject.SetActive(false);
         TargetImage.gameObject.SetActive(false);
@@ -110,7 +124,9 @@ public class GameStates : MonoBehaviour
                 TargetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, TargetTransform.rotation * rotateCoeff);
                 TargetImage.rectTransform.localScale = new Vector3(1, 1, 1) * TargetTransform.scale * scaleCoeff;
 
-                PlayerImage.color = CurrentLevel.bgColor * 0.9f;
+                UpdateSizeTexts();
+
+                PlayerImage.color = CurrentLevel.bgColor * 0.8f;
                 TargetImage.color = CurrentLevel.spriteColor;
                 MyInput.Init();
             }
@@ -199,12 +215,15 @@ public class GameStates : MonoBehaviour
             }
             PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, 15);
             PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, 15);
-            PlayerTransform.scale = Mathf.Clamp(PlayerTransform.scale, 1, 5);
-            PlayerTransform.rotation %= 12;
+            PlayerTransform.scale = Mathf.Clamp(PlayerTransform.scale, 1, 7);
+            PlayerTransform.rotation += 8;
+            PlayerTransform.rotation %= 8;
 
             PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
             PlayerImage.rectTransform.localRotation = Quaternion.Euler(0, 0, PlayerTransform.rotation * rotateCoeff);
             PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
+
+            UpdateSizeTexts();
             yield return new WaitForSeconds(playSpeed);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
@@ -228,6 +247,12 @@ public class GameStates : MonoBehaviour
         return player.x == target.x && player.y == target.y
             && player.rotation == target.rotation
             && player.scale == target.scale;
+    }
+
+    void UpdateSizeTexts()
+    {
+        PlayerText.text = TshirtSize[PlayerTransform.scale - 1];
+        TargetText.text = TshirtSize[TargetTransform.scale - 1];
     }
 
 }
