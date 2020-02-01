@@ -203,8 +203,9 @@ public class GameStates : MonoBehaviour
     private IEnumerator PlayCoroutine(List<PlayerInputs> inputs)
     {
         _isPlaying = true;
-        foreach (var inp in inputs)
+        for (int i = 0; i < inputs.Count; i++)
         {
+            PlayerInputs inp = inputs[i];
             if (inp == PlayerInputs.Left)
             {
                 PlayerTransform.x--;
@@ -244,7 +245,7 @@ public class GameStates : MonoBehaviour
             PlayerTransform.rotation %= 8;
 
             StartCoroutine(LerpCoroutine(PlayerImage.rectTransform, PlayerTransform));
-
+            MyInput.PaintAsDone(i, CurrentLevel.spriteColor);
             yield return new WaitForSeconds(0.5f);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
