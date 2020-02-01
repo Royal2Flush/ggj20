@@ -48,6 +48,9 @@ public class MyInput : MonoBehaviour
 
     private Dictionary<PlayerInputs, Sprite> _resourceMap;
 
+    private bool confirm1;
+    private bool confirm2;
+
     private void Start()
     {
         _resourceMap = new Dictionary<PlayerInputs, Sprite>
@@ -72,6 +75,14 @@ public class MyInput : MonoBehaviour
         {
             Destroy(t.gameObject);
         }
+
+        ResetConfirms();
+    }
+
+    public void ResetConfirms()
+    {
+        confirm1 = false;
+        confirm2 = false;
     }
 
     public InputTickResult Tick()
@@ -80,7 +91,7 @@ public class MyInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) Add(PlayerInputs.Left);
         if (Input.GetKeyDown(KeyCode.S)) Add(PlayerInputs.Down);
         if (Input.GetKeyDown(KeyCode.D)) Add(PlayerInputs.Right);
-        if (Input.mouseScrollDelta.y > 0  || Input.GetButtonDown("XboxB")) Add(PlayerInputs.ScaleUp);
+        if (Input.mouseScrollDelta.y > 0  || Input.GetButtonDown("XboxY")) Add(PlayerInputs.ScaleUp);
         if (Input.mouseScrollDelta.y < 0 || Input.GetButtonDown("XboxA")) Add(PlayerInputs.ScaleDown);
         if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxBumperLeft")) Add(PlayerInputs.CounterCW);
         if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("XboxBumperRight")) Add(PlayerInputs.CW);
@@ -95,6 +106,16 @@ public class MyInput : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            confirm1 = true;
+        }
+
+        if (Input.GetButtonDown("XboxX"))
+        {
+            confirm2 = true;
+        }
+
+        if (confirm1 && confirm2)
         {
             return InputTickResult.Confirm;
         }
