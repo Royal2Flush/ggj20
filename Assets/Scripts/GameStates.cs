@@ -50,18 +50,13 @@ public class GameStates : MonoBehaviour
 
     void Start()
     {
-        Init();
-    }
-
-    void Init()
-    {
-      levels = new Level[]
-      {
+        levels = new Level[]
+        {
             new Level
             {
                 target = new MyTransform
                 {
-                    x = 5, y = 3, rotation = 7, scale = 3
+                    x = 5, y = 3, rotation = 7, scale = 1
                 },
                 start = new MyTransform
                 {
@@ -70,10 +65,32 @@ public class GameStates : MonoBehaviour
                 sprite = Sprites[0],
                 bgColor = Color.red,
                 spriteColor = Color.blue
-            }
-      };
+            },
+            new Level
+            {
+                target = new MyTransform
+                {
+                    x = 7, y = 1, rotation = 4, scale = 2
+                },
+                start = new MyTransform
+                {
+                    x = 1, y = 5, rotation = 7, scale = 2
+                },
+                sprite = Sprites[0],
+                bgColor = Color.gray,
+                spriteColor = Color.green
+            },
+        };
 
-        CurrentLevelId = 0;
+        LoadLevel(0);
+
+        ChangeState(GameState.Splash);
+
+    }
+
+    private void LoadLevel(int index)
+    {
+        CurrentLevelId = index;
         CurrentLevel = levels[CurrentLevelId];
         PlayerTransform = CurrentLevel.start;
         TargetTransform = CurrentLevel.target;
@@ -82,20 +99,19 @@ public class GameStates : MonoBehaviour
         PlayerImage.gameObject.SetActive(false);
         TargetImage.gameObject.SetActive(false);
 
-        Splash.SetActive(true);
         GameOverText.SetActive(false);
         CountdownText.text = "";
 
-        ChangeState(GameState.Splash);
+        ChangeState(GameState.Countdown);
     }
 
     void Update()
     {
         if (CurrentState == GameState.Splash)
         {
+            Splash.SetActive(true);
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                Splash.SetActive(false);
                 ChangeState(GameState.Countdown);
             }
         }
@@ -103,6 +119,8 @@ public class GameStates : MonoBehaviour
         {
             if (!_isCountingDown)
             {
+                Splash.SetActive(false);
+
                 StartCoroutine(CountdownCoroutine());
             }
         }
@@ -151,12 +169,17 @@ public class GameStates : MonoBehaviour
                 StartCoroutine(PlayCoroutine(list));
             }
         }
+        else if (CurrentState == GameState.Transition)
+        {
+            CurrentLevelId++;
+            LoadLevel(CurrentLevelId);
+        }
         else if (CurrentState == GameState.Lose)
         {
             GameOverText.gameObject.SetActive(true);
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                Init();
+                LoadLevel(0);
             }
         }
     }
@@ -180,7 +203,8 @@ public class GameStates : MonoBehaviour
     {
         _isPlaying = true;
         float playSpeed = 0.5f;
-        foreach (var inp in inputs) {
+        foreach (var inp in inputs)
+        {
             if (inp == PlayerInputs.Left)
             {
                 PlayerTransform.x--;
@@ -219,6 +243,7 @@ public class GameStates : MonoBehaviour
             PlayerTransform.rotation += 8;
             PlayerTransform.rotation %= 8;
 
+
             PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
             PlayerImage.rectTransform.localRotation = Quaternion.Euler(0, 0, PlayerTransform.rotation * rotateCoeff);
             PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
@@ -239,7 +264,7 @@ public class GameStates : MonoBehaviour
 
     void ChangeState(GameState nextState)
     {
-    	CurrentState = nextState;
+        CurrentState = nextState;
     }
 
     bool IsTransformsEqual(MyTransform player, MyTransform target)

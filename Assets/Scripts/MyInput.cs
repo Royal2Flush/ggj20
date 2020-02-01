@@ -78,8 +78,8 @@ public class MyInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A)) Add(PlayerInputs.Left);
         if (Input.GetKeyDown(KeyCode.S)) Add(PlayerInputs.Down);
         if (Input.GetKeyDown(KeyCode.D)) Add(PlayerInputs.Right);
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) Add(PlayerInputs.CW);
-        if (Input.GetKeyDown(KeyCode.RightArrow)) Add(PlayerInputs.CounterCW);
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) Add(PlayerInputs.CounterCW);
+        if (Input.GetKeyDown(KeyCode.RightArrow)) Add(PlayerInputs.CW);
         if (Input.GetMouseButtonDown(0)) Add(PlayerInputs.ScaleDown);
         if (Input.GetMouseButtonDown(1)) Add(PlayerInputs.ScaleUp);
 

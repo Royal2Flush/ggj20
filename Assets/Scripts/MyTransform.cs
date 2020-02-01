@@ -1,4 +1,7 @@
-﻿public struct MyTransform
+﻿using System;
+
+[Serializable]
+public struct MyTransform
 {
     public int x;
     public int y;
