@@ -22,6 +22,9 @@ public class GameStates : MonoBehaviour
 
     public Sprite[] Sprites;
 
+    public GameObject Dot;
+    public Transform DotParent;
+
     [Header("UI")]
     public GameObject Splash;
     public GameObject GameOverText;
@@ -35,9 +38,9 @@ public class GameStates : MonoBehaviour
     [Space]
     public Level[] levels;
 
-    public int translateCoeff = 100;
-    public int rotateCoeff = 45;
-    public float scaleCoeff = 1.5f;
+    private int translateCoeff = 100;
+    private int rotateCoeff = 45;
+    private float scaleCoeff = 1.2f;
 
     public GameState CurrentState;
     public MyTransform PlayerTransform;
@@ -48,9 +51,19 @@ public class GameStates : MonoBehaviour
     private bool _isCountingDown = false;
     private bool _isInputState = false;
     private bool _isPlaying = false;
+    private Material dotMaterial;
 
     void Start()
     {
+        for (int i=0; i<=Screen.width / 100; i++)
+        {
+            for( int j=0; j<=Screen.height / 100; j++)
+            {
+                GameObject go = Instantiate(Dot, new Vector3(i * 100, j * 100, 0), Quaternion.identity, DotParent);
+                dotMaterial = go.GetComponent<Image>().material;
+            }
+        }
+
         levels = new Level[]
         {
             new Level
@@ -147,6 +160,8 @@ public class GameStates : MonoBehaviour
 
                 PlayerImage.color = CurrentLevel.bgColor * 0.8f;
                 TargetImage.color = CurrentLevel.spriteColor;
+                dotMaterial.color = PlayerImage.color;
+
                 MyInput.Init();
             }
 
