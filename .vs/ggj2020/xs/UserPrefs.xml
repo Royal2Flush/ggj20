@@ -1,17 +1,17 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameStates.cs">
+﻿<Properties StartupConfiguration="{3DBDC490-0979-9566-A825-E9F0C95CB7EC}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyInput.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameStates.cs" Line="26" Column="30" />
+      <File FileName="Assets/Scripts/GameStates.cs" Line="92" Column="24" />
+      <File FileName="Assets/Scripts/GameState.cs" Line="7" Column="15" />
+      <File FileName="Assets/Scripts/MyInput.cs" Line="4" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="ggj2020" expanded="True">
-            <Node name="Assembly-CSharp" expanded="True">
-              <Node name="Assets" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="GameStates.cs" selected="True" />
-                </Node>
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="MyInput.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -21,6 +21,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e1ff70e8-7c98-471a-a4fa-5676d022d233" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

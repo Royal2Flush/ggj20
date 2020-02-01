@@ -89,7 +89,7 @@ public class GameStates : MonoBehaviour
             PlayerImage.color = CurrentLevel.bgColor * 0.9f;
             TargetImage.color = CurrentLevel.spriteColor;
 
-            MyInput.Tick(ref PlayerTransform);
+            MyInput.Tick();
         }
     }
 
@@ -110,6 +110,13 @@ public class GameStates : MonoBehaviour
     void ChangeState(GameState nextState)
     {
     	CurrentState = nextState;
+    }
+
+    bool IsTransformsEqual(MyTransform player, MyTransform target)
+    {
+        return player.x == target.x && player.y == target.y
+            && player.rotation == target.rotation
+            && player.scale == target.scale;
     }
 
 }
