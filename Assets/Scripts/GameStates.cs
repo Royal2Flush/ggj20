@@ -140,6 +140,7 @@ public class GameStates : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CountdownText.text = "1";
         yield return new WaitForSeconds(1f);
+        CountdownText.text = "";
         ChangeState(GameState.Input);
         _isCountingDown = false;
     }
