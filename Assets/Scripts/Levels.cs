@@ -21,8 +21,8 @@ public partial class GameStates
         int targetRot = Random.Range(1, 7);
         int targetScale = Random.Range(1, 5);
 
-        int playerX = targetX + Random.Range(-5, 5);
-        int playerY = targetY + Random.Range(-5, 5);
+        int playerX = Mathf.Clamp(targetX + Random.Range(-5, 5), 1, Screen.width / 100 - 1);
+        int playerY = Mathf.Clamp(targetY + Random.Range(-5, 5), 1, Screen.height / 100 - 1);
         int playerRot = Random.Range(1, 7);
         int playerScale = Random.Range(1, 5);
 
