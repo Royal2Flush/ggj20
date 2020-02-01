@@ -95,6 +95,14 @@ public class GameStates : MonoBehaviour
                 PlayerImage.gameObject.SetActive(true);
                 TargetImage.gameObject.SetActive(true);
 
+                PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
+                PlayerImage.rectTransform.localRotation = Quaternion.Euler(0, 0, PlayerTransform.rotation * rotateCoeff);
+                PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
+
+                TargetImage.rectTransform.position = new Vector3(TargetTransform.x * translateCoeff, TargetTransform.y * translateCoeff, 0);
+                TargetImage.rectTransform.localRotation = Quaternion.Euler(0, 0, TargetTransform.rotation * rotateCoeff);
+                TargetImage.rectTransform.localScale = new Vector3(1, 1, 1) * TargetTransform.scale * scaleCoeff;
+
                 PlayerImage.color = CurrentLevel.bgColor * 0.9f;
                 TargetImage.color = CurrentLevel.spriteColor;
                 MyInput.Init();
@@ -176,10 +184,10 @@ public class GameStates : MonoBehaviour
             PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, 15);
             PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, 15);
             PlayerTransform.scale = Mathf.Clamp(PlayerTransform.scale, 1, 5);
-            PlayerTransform.rotation = Mathf.Clamp(PlayerTransform.rotation, 0, 11);
+            PlayerTransform.rotation %= 12;
 
             PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
-            PlayerImage.rectTransform.Rotate(new Vector3(0, 0, PlayerTransform.rotation * rotateCoeff));
+            PlayerImage.rectTransform.localRotation = Quaternion.Euler(0, 0, PlayerTransform.rotation * rotateCoeff);
             PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
             yield return new WaitForSeconds(playSpeed);
         }
