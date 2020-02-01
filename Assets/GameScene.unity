@@ -437,6 +437,7 @@ RectTransform:
   - {fileID: 1111196025}
   - {fileID: 495922911}
   - {fileID: 1716171547}
+  - {fileID: 1640355651}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -672,6 +673,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1640355650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640355651}
+  - component: {fileID: 1640355652}
+  m_Layer: 5
+  m_Name: Input
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1640355651
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 869450252}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1640355652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640355650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 3
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!1 &1716171546
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,9 +873,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722180255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de080d44698ea134daf246bba22e9c3c, type: 3}
+  m_Script: {fileID: 11500000, guid: defddfc0397554a398d9f5cea2effe61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myInputs: 
+  InputIconsParent: {fileID: 1640355651}
+  InputIconPrefab: {fileID: 3446220086344654965, guid: 06887ec564fad7a4b829e9bbb2c154bf,
+    type: 3}
+  LeftSprite: {fileID: 21300000, guid: 92fa49d052917204c91a989a8789ca90, type: 3}
+  RightSprite: {fileID: 21300000, guid: 583655b8cbe3c6b47a9bdce8cc3a9962, type: 3}
+  UpSprite: {fileID: 21300000, guid: eca6b40fe55e524488bd56e5b73e399a, type: 3}
+  DownSprite: {fileID: 21300000, guid: 7b8cd8055b47de14bb2606a319f8b865, type: 3}
+  CwSprite: {fileID: 21300000, guid: 6bb63354d6210034e9c0d99dacf77e47, type: 3}
+  CCwSprite: {fileID: 21300000, guid: 389da3e41ddb5ba4cab2a3261ed80214, type: 3}
+  ScaleUpSprite: {fileID: 21300000, guid: b2434e30679d17b46bc5693a2d427eb3, type: 3}
+  ScaleDownSprite: {fileID: 21300000, guid: 85363066921f372418ff1c6c6cbd114a, type: 3}
 --- !u!1 &1868941404
 GameObject:
   m_ObjectHideFlags: 0
