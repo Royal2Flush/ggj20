@@ -17,6 +17,7 @@ public class GameStates : MonoBehaviour
     public TextMeshProUGUI CountdownText;
     public Image PlayerImage;
     public Image TargetImage;
+    public AnimationCurve LerpCurve;
 
     [Space]
     public Level[] levels;
@@ -186,7 +187,6 @@ public class GameStates : MonoBehaviour
     private IEnumerator PlayCoroutine(List<PlayerInputs> inputs)
     {
         _isPlaying = true;
-        float playSpeed = 0.5f;
         foreach (var inp in inputs)
         {
             if (inp == PlayerInputs.Left)
@@ -227,10 +227,9 @@ public class GameStates : MonoBehaviour
             PlayerTransform.rotation += 12;
             PlayerTransform.rotation %= 12;
 
-            PlayerImage.rectTransform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
-            PlayerImage.rectTransform.localRotation = Quaternion.Euler(0, 0, PlayerTransform.rotation * rotateCoeff);
-            PlayerImage.rectTransform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
-            yield return new WaitForSeconds(playSpeed);
+            StartCoroutine(LerpCoroutine(PlayerImage.rectTransform, PlayerTransform));
+
+            yield return new WaitForSeconds(0.5f);
         }
         if (IsTransformsEqual(PlayerTransform, TargetTransform))
         {
@@ -253,6 +252,34 @@ public class GameStates : MonoBehaviour
         return player.x == target.x && player.y == target.y
             && player.rotation == target.rotation
             && player.scale == target.scale;
+    }
+
+    private IEnumerator LerpCoroutine(RectTransform rectTransform, MyTransform myTransform)
+    {
+        var sourcePos = rectTransform.position;
+        var sourceRot = rectTransform.localRotation;
+        var sourceScale = rectTransform.localScale;
+
+        var targetPos = new Vector3(myTransform.x * translateCoeff, myTransform.y * translateCoeff, 0);
+        var targetRot = Quaternion.Euler(0, 0, myTransform.rotation * rotateCoeff);
+        var targetScale = Vector3.one * myTransform.scale * scaleCoeff;
+
+        const float duration = 0.25f;
+
+        for (float f = 0; f < duration; f += Time.deltaTime)
+        {
+            float t = LerpCurve.Evaluate(f / duration);
+
+            rectTransform.position = Vector3.Lerp(sourcePos, targetPos, t);
+            rectTransform.localRotation = Quaternion.Slerp(sourceRot, targetRot, t);
+            rectTransform.localScale = Vector3.Lerp(sourceScale, targetScale, t);
+
+            yield return null;
+        }
+
+        rectTransform.position = targetPos;
+        rectTransform.localRotation = targetRot;
+        rectTransform.localScale = targetScale;
     }
 
 }

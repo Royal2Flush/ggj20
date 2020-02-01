@@ -1066,10 +1066,44 @@ MonoBehaviour:
   CountdownText: {fileID: 1868941406}
   PlayerImage: {fileID: 495922912}
   TargetImage: {fileID: 1716171548}
+  LerpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   translateCoeff: 100
   rotateCoeff: 30
   scaleCoeff: 1.5
   CurrentState: 0
+  PlayerTransform:
+    x: 0
+    y: 0
+    rotation: 0
+    scale: 0
+  TargetTransform:
+    x: 0
+    y: 0
+    rotation: 0
+    scale: 0
   CurrentLevelId: 0
 --- !u!4 &1722180257
 Transform:
