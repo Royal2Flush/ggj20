@@ -210,11 +210,11 @@ public partial class GameStates : MonoBehaviour
             }
             else if (inp == PlayerInputs.CW)
             {
-                PlayerTransform.rotation++;
+                PlayerTransform.rotation--;
             }
             else if (inp == PlayerInputs.CounterCW)
             {
-                PlayerTransform.rotation--;
+                PlayerTransform.rotation++;
             }
             else if (inp == PlayerInputs.ScaleUp)
             {
