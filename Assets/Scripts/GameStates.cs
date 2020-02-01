@@ -30,6 +30,7 @@ public class GameStates : MonoBehaviour
     public int CurrentLevelId;
 
     private bool _isCountingDown = false;
+    private bool _isPlaying = false;
 
     void Start()
     {
@@ -89,7 +90,17 @@ public class GameStates : MonoBehaviour
             PlayerImage.color = CurrentLevel.bgColor * 0.9f;
             TargetImage.color = CurrentLevel.spriteColor;
 
-            MyInput.Tick();
+            if (MyInput.Tick())
+            {
+                ChangeState(GameState.Play);
+            }
+        }
+        else if (CurrentState == GameState.Play)
+        {
+            if (!_isPlaying)
+            {
+                StartCoroutine(PlayCoroutine(new List<PlayerInputs>()));
+            }
         }
     }
 
@@ -105,6 +116,59 @@ public class GameStates : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ChangeState(GameState.Input);
         _isCountingDown = false;
+    }
+
+    private IEnumerator PlayCoroutine(List<PlayerInputs> inputs)
+    {
+        _isPlaying = true;
+        float playSpeed = 0.5f;
+        foreach (var inp in inputs) {
+            if (inp == PlayerInputs.Left)
+            {
+                PlayerTransform.x--;
+            }
+            else if (inp == PlayerInputs.Right)
+            {
+                PlayerTransform.x++;
+            }
+            else if (inp == PlayerInputs.Up)
+            {
+                PlayerTransform.y++;
+            }
+            else if (inp == PlayerInputs.Down)
+            {
+                PlayerTransform.y--;
+            }
+            else if (inp == PlayerInputs.CW)
+            {
+                PlayerTransform.rotation++;
+            }
+            else if (inp == PlayerInputs.CounterCW)
+            {
+                PlayerTransform.rotation--;
+            }
+            else if (inp == PlayerInputs.ScaleUp)
+            {
+                PlayerTransform.scale++;
+            }
+            else if (inp == PlayerInputs.ScaleDown)
+            {
+                PlayerTransform.scale--;
+            }
+            PlayerImage.gameObject.transform.position = new Vector3(PlayerTransform.x * translateCoeff, PlayerTransform.y * translateCoeff, 0);
+            PlayerImage.gameObject.transform.Rotate(new Vector3(0, 0, PlayerTransform.rotation * rotateCoeff));
+            PlayerImage.gameObject.transform.localScale = new Vector3(1, 1, 1) * PlayerTransform.scale * scaleCoeff;
+            yield return new WaitForSeconds(playSpeed);
+        }
+        if (IsTransformsEqual(PlayerTransform, TargetTransform))
+        {
+            ChangeState(GameState.Transition);
+        }
+        else
+        {
+            ChangeState(GameState.Lose);
+        }
+        _isPlaying = false;
     }
 
     void ChangeState(GameState nextState)
