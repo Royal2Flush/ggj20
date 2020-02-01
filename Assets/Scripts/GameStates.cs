@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameStates : MonoBehaviour
+public partial class GameStates : MonoBehaviour
 {
     public List<string> TshirtSize = new List<string>
     {
@@ -33,6 +33,7 @@ public class GameStates : MonoBehaviour
     public AnimationCurve LerpCurve;
 
     [Space]
+
     public Level[] levels;
 
     public int translateCoeff = 100;
@@ -51,37 +52,7 @@ public class GameStates : MonoBehaviour
 
     void Start()
     {
-        levels = new Level[]
-        {
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 5, y = 3, rotation = 7, scale = 1
-                },
-                start = new MyTransform
-                {
-                    x = 3, y = 5, rotation = 0, scale = 1
-                },
-                sprite = Sprites[0],
-                bgColor = Color.red,
-                spriteColor = Color.blue
-            },
-            new Level
-            {
-                target = new MyTransform
-                {
-                    x = 7, y = 1, rotation = 4, scale = 2
-                },
-                start = new MyTransform
-                {
-                    x = 1, y = 5, rotation = 7, scale = 2
-                },
-                sprite = Sprites[0],
-                bgColor = Color.gray,
-                spriteColor = Color.green
-            },
-        };
+        InitLevels();
 
         LoadLevel(0);
 
