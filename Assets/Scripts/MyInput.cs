@@ -27,6 +27,11 @@ public class MyInput : MonoBehaviour
 
     public List<PlayerInputs> myInputs;
 
+    private void Start()
+    {
+        
+    }
+
     public void Init()
     {
         myInputs = new List<PlayerInputs>();
