@@ -244,7 +244,6 @@ public class GameStates : MonoBehaviour
             PlayerTransform.rotation %= 8;
 
             StartCoroutine(LerpCoroutine(PlayerImage.rectTransform, PlayerTransform));
-            UpdateSizeTexts();
 
             yield return new WaitForSeconds(0.5f);
         }
@@ -300,9 +299,11 @@ public class GameStates : MonoBehaviour
             yield return null;
         }
 
+
         rectTransform.position = targetPos;
         rectTransform.localRotation = targetRot;
         rectTransform.localScale = targetScale;
+        UpdateSizeTexts();
     }
 
 }
