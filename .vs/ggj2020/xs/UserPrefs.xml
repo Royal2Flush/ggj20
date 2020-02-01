@@ -1,10 +1,10 @@
-﻿<Properties StartupConfiguration="{73C73578-1148-605B-72B6-36846EEFAFFC}|">
+﻿<Properties StartupConfiguration="{3DBDC490-0979-9566-A825-E9F0C95CB7EC}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameStates.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameStates.cs" Line="13" Column="13" />
+      <File FileName="Assets/Scripts/GameStates.cs" Line="286" Column="13" />
       <File FileName="Assets/Scripts/GameState.cs" Line="7" Column="15" />
-      <File FileName="Assets/Scripts/MyInput.cs" Line="110" Column="1" />
-      <File FileName="Assets/Scripts/MyTransform.cs" Line="11" Column="1" />
+      <File FileName="Assets/Scripts/MyInput.cs" />
+      <File FileName="Assets/Scripts/MyTransform.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,7 +22,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="e1ff70e8-7c98-471a-a4fa-5676d022d233" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7aa2431b-86f4-4ab9-828d-149c1a183ee5" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
