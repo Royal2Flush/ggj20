@@ -16,13 +16,18 @@ public partial class GameStates
 
     Level GenerateLevel()
     {
+        int LolRandom(int x1, int y1, int x2, int y2) =>
+            Random.value < 0.5f
+                ? Random.Range(x1, y1)
+                : Random.Range(x2, y2);
+
         int targetX = Random.Range(1, Screen.width / 100 - 1);
         int targetY = Random.Range(1, Screen.height / 100 - 1);
         int targetRot = Random.Range(1, 7);
         int targetScale = Random.Range(1, 5);
 
-        int playerX = Mathf.Clamp(targetX + Random.Range(-5, 5), 1, Screen.width / 100 - 1);
-        int playerY = Mathf.Clamp(targetY + Random.Range(-5, 5), 1, Screen.height / 100 - 1);
+        int playerX = Mathf.Clamp(targetX + LolRandom(-6, -2, 2, 6), 1, Screen.width / 100 - 1);
+        int playerY = Mathf.Clamp(targetY + LolRandom(-6, -2, 2, 6), 1, Screen.height / 100 - 1);
         int playerRot = Random.Range(1, 7); if (playerRot == targetRot) playerRot = Random.Range(1, 7);
         int playerScale = Random.Range(1, 5); if (playerScale == targetScale) playerScale = Random.Range(1, 5);
 
