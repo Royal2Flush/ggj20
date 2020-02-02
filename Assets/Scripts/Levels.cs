@@ -23,8 +23,8 @@ public partial class GameStates
 
         int playerX = Mathf.Clamp(targetX + Random.Range(-5, 5), 1, Screen.width / 100 - 1);
         int playerY = Mathf.Clamp(targetY + Random.Range(-5, 5), 1, Screen.height / 100 - 1);
-        int playerRot = Random.Range(1, 7);
-        int playerScale = Random.Range(1, 5);
+        int playerRot = Random.Range(1, 7); if (playerRot == targetRot) playerRot = Random.Range(1, 7);
+        int playerScale = Random.Range(1, 5); if (playerScale == targetScale) playerScale = Random.Range(1, 5);
 
         Color bgColor = new Color(
             Random.Range(0.6f, 0.9f),
