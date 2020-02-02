@@ -301,8 +301,8 @@ public partial class GameStates : MonoBehaviour
                 audioSource.clip = scaleDownClip;
                 audioSource.Play();
             }
-            PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, 15);
-            PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, 15);
+            PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, Screen.width / 100);
+            PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, Screen.height / 100);
             PlayerTransform.scale = Mathf.Clamp(PlayerTransform.scale, 1, 7);
             PlayerTransform.rotation += 8;
             PlayerTransform.rotation %= 8;
@@ -325,11 +325,11 @@ public partial class GameStates : MonoBehaviour
             }
             else
             {
-                ChangeState(GameState.Transition);
                 audioSource.Stop();
-                audioSource.clip = winClip;
+                audioSource.clip = cukClip;
                 audioSource.Play();
                 yield return new WaitForSeconds(0.2f);
+                ChangeState(GameState.Transition);
             }
         }
         else

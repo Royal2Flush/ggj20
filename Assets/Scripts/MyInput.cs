@@ -108,14 +108,14 @@ public class MyInput : MonoBehaviour
             return InputTickResult.Timeout;
         }
 
-        if (Input.GetButtonDown("P2XboxBumperLeft") || Input.GetButtonDown("P2XboxBumperRight"))
+        if (Input.GetButtonDown("P2XboxStart"))
         {
             confirm1 = true;
             audioSource.clip = confirmClip;
             audioSource.Play();
         }
 
-        if (Input.GetButtonDown("P1XboxX"))
+        if (Input.GetButtonDown("P1XboxStart"))
         {
             confirm2 = true;
             audioSource.clip = confirmClip;
