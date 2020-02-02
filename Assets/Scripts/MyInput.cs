@@ -87,14 +87,14 @@ public class MyInput : MonoBehaviour
 
     public InputTickResult Tick()
     {
-        if (Input.GetKeyDown(KeyCode.W)) Add(PlayerInputs.Up);
-        if (Input.GetKeyDown(KeyCode.A)) Add(PlayerInputs.Left);
-        if (Input.GetKeyDown(KeyCode.S)) Add(PlayerInputs.Down);
-        if (Input.GetKeyDown(KeyCode.D)) Add(PlayerInputs.Right);
-        if (Input.mouseScrollDelta.y > 0  || Input.GetButtonDown("XboxY")) Add(PlayerInputs.ScaleUp);
-        if (Input.mouseScrollDelta.y < 0 || Input.GetButtonDown("XboxA")) Add(PlayerInputs.ScaleDown);
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("XboxBumperLeft")) Add(PlayerInputs.CounterCW);
-        if (Input.GetMouseButtonDown(1) || Input.GetButtonDown("XboxBumperRight")) Add(PlayerInputs.CW);
+        if (Input.GetButtonDown("P2XboxY")) Add(PlayerInputs.Up);
+        if (Input.GetButtonDown("P2XboxX")) Add(PlayerInputs.Left);
+        if (Input.GetButtonDown("P2XboxA")) Add(PlayerInputs.Down);
+        if (Input.GetButtonDown("P2XboxB")) Add(PlayerInputs.Right);
+        if (Input.GetButtonDown("P1XboxY")) Add(PlayerInputs.ScaleUp);
+        if (Input.GetButtonDown("P1XboxA")) Add(PlayerInputs.ScaleDown);
+        if (Input.GetButtonDown("P1XboxBumperLeft")) Add(PlayerInputs.CounterCW);
+        if (Input.GetButtonDown("P1XboxBumperRight")) Add(PlayerInputs.CW);
 
         _timer -= Time.deltaTime;
 
@@ -105,12 +105,12 @@ public class MyInput : MonoBehaviour
             return InputTickResult.Timeout;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("P2XboxBumperLeft") || Input.GetButtonDown("P2XboxBumperRight"))
         {
             confirm1 = true;
         }
 
-        if (Input.GetButtonDown("XboxX"))
+        if (Input.GetButtonDown("P1XboxX"))
         {
             confirm2 = true;
         }

@@ -102,7 +102,7 @@ public partial class GameStates : MonoBehaviour
         if (CurrentState == GameState.Splash)
         {
             Splash.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetButtonDown("P1XboxX"))
             {
                 ChangeState(GameState.Countdown);
             }
@@ -172,7 +172,7 @@ public partial class GameStates : MonoBehaviour
         else if (CurrentState == GameState.Lose)
         {
             GameOverText.gameObject.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetButtonDown("P1XboxX"))
             {
                 InitLevels();
                 LoadLevel(0);
@@ -181,7 +181,7 @@ public partial class GameStates : MonoBehaviour
         else if (CurrentState == GameState.Win)
         {
             WinUI.gameObject.SetActive(true);
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetButtonDown("P1XboxX"))
             {
                 InitLevels();
                 LoadLevel(0);
