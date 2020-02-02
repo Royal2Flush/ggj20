@@ -26,12 +26,10 @@ public partial class GameStates
         int playerRot = Random.Range(1, 7);
         int playerScale = Random.Range(1, 5);
 
-        const float valueMin = 0.3f;
-        const float valueMax = 0.9f;
-
-        Color bgColor = new Color(Random.Range(valueMin, valueMax), 
-            Random.Range(valueMin, valueMax), 
-            Random.Range(valueMin, valueMax), 
+        Color bgColor = new Color(
+            Random.Range(0.6f, 0.9f),
+            Random.Range(0.6f, 0.9f),
+            Random.Range(0.6f, 0.9f),
             1f);
         Color spriteColor = new Color(1 - bgColor.r, 1 - bgColor.g, 1 - bgColor.b, 1);
 
