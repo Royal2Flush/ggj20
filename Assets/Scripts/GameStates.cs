@@ -25,6 +25,23 @@ public partial class GameStates : MonoBehaviour
     public GameObject Dot;
     public Transform DotParent;
 
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip countdownClip;
+    public AudioClip timerClip;
+    public AudioClip silenceClip;
+    public AudioClip loseClip;
+    public AudioClip winClip;
+    public AudioClip cukClip;
+    public AudioClip scaleUpClip;
+    public AudioClip scaleDownClip;
+    public AudioClip rotateLeftClip;
+    public AudioClip rotateRightClip;
+    public AudioClip translateClip;
+    public AudioClip translate2Clip;
+
+    [Space]
+
     [Header("UI")]
     public GameObject Splash;
     public GameObject GameOverText;
@@ -121,6 +138,9 @@ public partial class GameStates : MonoBehaviour
             if (!_isInputState)
             {
                 _isInputState = true;
+                audioSource.clip = timerClip;
+                audioSource.Play();
+
                 Camera.backgroundColor = CurrentLevel.bgColor;
 
                 PlayerImage.gameObject.SetActive(true);
@@ -154,12 +174,19 @@ public partial class GameStates : MonoBehaviour
             {
                 _isInputState = false;
                 ChangeState(GameState.Lose);
+                audioSource.Stop();
+                audioSource.clip = loseClip;
+                audioSource.Play();
             }
         }
         else if (CurrentState == GameState.Play)
         {
             if (!_isPlaying)
             {
+                audioSource.Stop();
+                audioSource.clip = silenceClip;
+                audioSource.Play();
+
                 var list = MyInput.myInputs;
                 StartCoroutine(PlayCoroutine(list));
             }
@@ -196,7 +223,10 @@ public partial class GameStates : MonoBehaviour
         ProgressText.text = CurrentLevelId.ToString() + " out of " + levels.Length.ToString();
         CountdownText.text = "3";
         SplashText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
+        audioSource.clip = countdownClip;
+        audioSource.Play();
+        yield return new WaitForSeconds(0.7f);
         CountdownText.text = "2";
         yield return new WaitForSeconds(1f);
         CountdownText.text = "1";
@@ -218,34 +248,58 @@ public partial class GameStates : MonoBehaviour
             if (inp == PlayerInputs.Left)
             {
                 PlayerTransform.x--;
+                audioSource.Stop();
+                audioSource.clip = translateClip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.Right)
             {
                 PlayerTransform.x++;
+                audioSource.Stop();
+                audioSource.clip = translateClip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.Up)
             {
                 PlayerTransform.y++;
+                audioSource.Stop();
+                audioSource.clip = translate2Clip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.Down)
             {
                 PlayerTransform.y--;
+                audioSource.Stop();
+                audioSource.clip = translate2Clip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.CW)
             {
                 PlayerTransform.rotation--;
+                audioSource.Stop();
+                audioSource.clip = rotateRightClip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.CounterCW)
             {
                 PlayerTransform.rotation++;
+                audioSource.Stop();
+                audioSource.clip = rotateLeftClip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.ScaleUp)
             {
                 PlayerTransform.scale++;
+                audioSource.Stop();
+                audioSource.clip = scaleUpClip;
+                audioSource.Play();
             }
             else if (inp == PlayerInputs.ScaleDown)
             {
                 PlayerTransform.scale--;
+                audioSource.Stop();
+                audioSource.clip = scaleDownClip;
+                audioSource.Play();
             }
             PlayerTransform.x = Mathf.Clamp(PlayerTransform.x, 0, 15);
             PlayerTransform.y = Mathf.Clamp(PlayerTransform.y, 0, 15);
@@ -265,15 +319,25 @@ public partial class GameStates : MonoBehaviour
             if (CurrentLevelId+1 == levels.Length)
             {
                 ChangeState(GameState.Win);
+                audioSource.Stop();
+                audioSource.clip = winClip;
+                audioSource.Play();
             }
             else
             {
                 ChangeState(GameState.Transition);
+                audioSource.Stop();
+                audioSource.clip = winClip;
+                audioSource.Play();
+                yield return new WaitForSeconds(0.2f);
             }
         }
         else
         {
             ChangeState(GameState.Lose);
+            audioSource.Stop();
+            audioSource.clip = loseClip;
+            audioSource.Play();
         }
         _isPlaying = false;
     }

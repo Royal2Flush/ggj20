@@ -46,6 +46,9 @@ public class MyInput : MonoBehaviour
     public Sprite ScaleUpSprite;
     public Sprite ScaleDownSprite;
 
+    public AudioSource audioSource;
+    public AudioClip confirmClip;
+
     private Dictionary<PlayerInputs, Sprite> _resourceMap;
 
     private bool confirm1;
@@ -108,11 +111,15 @@ public class MyInput : MonoBehaviour
         if (Input.GetButtonDown("P2XboxBumperLeft") || Input.GetButtonDown("P2XboxBumperRight"))
         {
             confirm1 = true;
+            audioSource.clip = confirmClip;
+            audioSource.Play();
         }
 
         if (Input.GetButtonDown("P1XboxX"))
         {
             confirm2 = true;
+            audioSource.clip = confirmClip;
+            audioSource.Play();
         }
 
         if (confirm1 && confirm2)
